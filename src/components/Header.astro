@@ -2,23 +2,75 @@
 import winboat_logo from "../assets/winboat_logo.svg";
 ---
 
-<header class="flex flex-col lg:flex-row w-full items-center justify-between my-5">
-    <div class="flex flex-row items-center gap-2 select-none">
-        <img src={winboat_logo.src} alt="WinBoat Logo" class="h-12 w-12" />
-        <span class="text-3xl font-semibold text-indigo-400">WinBoat</span>
+<header class="w-full my-5 relative">
+    <div class="flex items-center justify-between">
+        <div class="flex flex-row items-center gap-2 select-none">
+            <img src={winboat_logo.src} alt="WinBoat Logo" class="h-12 w-12" />
+            <span class="text-3xl font-semibold text-indigo-400">WinBoat</span>
+        </div>
+
+        <!-- Mobile Button -->
+        <button
+            id="menu-btn"
+            class="
+                lg:hidden text-indigo-300 text-3xl w-12 h-12
+                rounded-full border-2 border-indigo-500
+                bg-indigo-500/20 shadow-md shadow-indigo-500/60
+                transition-all duration-300 hover:text-white hover:scale-105">
+            ☰
+        </button>
+
+        <!-- Desktop bar -->
+        <nav class="hidden lg:block">
+            <ul class="
+                flex flex-row items-center text-sm md:text-md gap-2 md:gap-6 px-2 md:px-6 py-2
+                rounded-full border-2 border-indigo-500 bg-indigo-500/20 text-indigo-300
+                shadow-md shadow-indigo-500/60 transition-colors duration-300
+                *:hover:text-white *:transition-all *:hover:px-0.5 *:hover:scale-x-110
+            ">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#requirements">Pre-Requisites</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#contribute">Contribute</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
     </div>
-    <nav>
-        <ul class="
-            flex flex-row items-center text-sm md:text-md gap-2 md:gap-6 px-2 md:px-6 py-2 mt-3 2xl:mt-0 rounded-full border-2 border-indigo-500 bg-indigo-500/20 text-indigo-300
-            shadow-md shadow-indigo-500/60 transition-colors duration-300
-            *:hover:text-shadow-indigo-500 *:hover:text-shadow-md *:hover:text-white *:transition-all *:hover:px-0.5 *:hover:scale-x-110
+
+    <!-- Mobile Dropdown -->
+    <nav id="mobile-menu" class="lg:hidden absolute right-0 top-full mt-4 flex justify-end">
+        <ul id="mobile-box"
+            class="
+                flex flex-col items-end gap-4 w-fit px-6 py-4 rounded-xl border-2 border-indigo-500
+                bg-indigo-500/20 text-indigo-300 shadow-md shadow-indigo-500/60 origin-top
+                scale-y-0 opacity-0 backdrop-blur-md transition-all duration-300 ease-in-out
         ">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#requirements">Pre-Requisites</a></li>
-            <li><a href="#download">Download</a></li>
-            <li><a href="#contribute">Contribute</a></li>
-            <li><a href="#community">Community</a></li>
-            <li><a href="#faq">FAQ</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#requirements">Pre-Requisites</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#contribute">Contribute</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#faq">FAQ</a></li>
         </ul>
     </nav>
 </header>
+
+<script>
+    const btn = document.getElementById("menu-btn");
+    const box = document.getElementById("mobile-box");
+
+    let open = false;
+
+    btn?.addEventListener("click", () => {
+        open = !open;
+
+        if (open) {
+            box?.classList.remove("scale-y-0", "opacity-0");
+            box?.classList.add("scale-y-100", "opacity-100");
+        } else {
+            box?.classList.remove("scale-y-100", "opacity-100");
+            box?.classList.add("scale-y-0", "opacity-0");
+        }
+    });
+</script>
